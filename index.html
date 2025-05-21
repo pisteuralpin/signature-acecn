@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <script src="./generator.js" defer></script>
+    <title>ACECN - Générateur de signature</title>
+</head>
+<body>
+    <h1>Générateur de signature ACECN</h1>
+    <section>
+        <div>
+            <form>
+                <label for="first_name_field">Prénom</label>
+                <input type="text" id="first_name_field" class="name_field" placeholder="Prénom" autocomplete="given-name" required>
+                <label for="last_name_field">Nom</label>
+                <input type="text" id="last_name_field" class="name_field" placeholder="Nom" autocomplete="family-name" required>
+                <label for="role_field">Rôle</label>
+                <input type="text" id="role_field" placeholder="Respo XXX" required>
+                <label for="phone_field">Téléphone</label>
+                <input type="tel" id="phone_field" placeholder="+33 1 23 45 67 89" autocomplete="tel">
+                <label for="email_field">Email</label>
+                <input type="email" id="email_field" placeholder="prenom.nom@eleves.ec-nantes.fr" autocomplete="email" required>
+                <div class="checkbox-container">
+                    <label for="bda_email_field">Utiliser l'adresse du BDA</label>
+                    <input type="checkbox" id="bda_email_field">
+                </div>
+                <label for="logo_field">Logo</label>
+                <select id="logo_field">
+                    <option value="logo-acecn">Logo ACECN</option>
+                    <option value="logo-MK">Logo Mario K'art</option>
+                </select>
+                <button type="submit" id="generate_button">Générer</button>
+            </form>
+        </div>
+        <div id="signature_container">
+            <table id="signature" role="presentation" style="text-align: left;">
+                <tr>
+                    <td style="max-width: 200px; max-height: 150px;">
+                        <img src="https://pisteuralpin.github.io/signature-acecn/assets/logo-acecn.svg" style="max-width: 200px; max-height: 150px;" alt="Logo de l'ACECN"/>
+                    </td>
+                    <td>
+                        <span style="display: block; width: 7px; height: 38px; background-color: #fab600; margin: 0 20px 0 5px;"></span>
+                    </td>
+                    <td>
+                        <p id="name" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;">Prénom NOM</p>
+                        <p id="role" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-style:italic; font-size: small; line-height: normal;">Respo XXX</p>
+                        <p id="association" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;">Association Culturelle de l'École Centrale de Nantes</p>
+                        <hr style=" width: 30px; height: 5px; background-color: #fab600; border: none; margin-left: 0px;" />
+                        <p id="phone" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;"><a href="" style="color: #102648;"></a></p>
+                        <p id="email" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;"><a href="mailto:prenom.nom@eleves.ec-nantes.fr" style="color: #102648;">prenom.nom@eleves.ec-nantes.fr</a></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <footer>
+        <p>Développé par <a href="https://github.com/pisteuralpin" target="_blank">Mathurin Roulier</a> - Licence GNU GPLv3</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateName(); updateRole(); updateEmail(); updatePhone(); updateLogo();
+        });
+
+        document.getElementById('role').textContent = this.value;
+
+        const ECNEmailRegex = new RegExp(/.*\..*@eleves.ec-nantes.fr/);
+
+        Array.from(document.querySelectorAll('.name_field')).forEach(function(field) {
+            field.addEventListener('input', function() { updateName(); updateEmail(); });
+        });
+
+        document.getElementById('role_field').addEventListener('input', function() { updateRole(); });
+
+        document.getElementById('phone_field').addEventListener('input', function() { updatePhone(); });
+        
+        document.getElementById('email_field').addEventListener('input', function() { updateEmail(); });
+
+        document.getElementById('bda_email_field').addEventListener('change', function() { updateEmail(); });
+        
+        document.getElementById('logo_field').addEventListener('change', function() { updateLogo(); });
+
+
+        document.querySelector('form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const signature = document.getElementById('signature').outerHTML.replaceAll(/[\n\t ]{2,}/g, '');
+            const tempInput = document.createElement('textarea');
+            tempInput.value = signature;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            alert('Signature copiée dans le presse-papier !');
+        });
+    </script>
+</body>
+</html>
