@@ -1,0 +1,1 @@
+# Générateur de signature mail HTML pour l'Association Culturelle de l'École Centrale de Nantes
