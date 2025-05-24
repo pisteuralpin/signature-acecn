@@ -11,7 +11,7 @@
     <h1>Générateur de signature ACECN</h1>
     <section>
         <div>
-            <form>
+            <form id="signature_form">
                 <label for="first_name_field">Prénom</label>
                 <input type="text" id="first_name_field" class="name_field" placeholder="Prénom" autocomplete="given-name" required>
                 <label for="last_name_field">Nom</label>
@@ -35,7 +35,7 @@
                     <option value="logo-acecn">Logo ACECN</option>
                     <option value="logo-MK">Logo Mario K'art</option>
                 </select>
-                <button type="submit" id="generate_button">Générer</button>
+                <button type="submit" id="generate_button" class="rectangle primary">Copier</button>
             </form>
         </div>
         <div id="signature_container">
@@ -93,17 +93,9 @@
         
         document.getElementById('logo_field').addEventListener('change', function() { updateLogo(); });
 
-
-        document.querySelector('form').addEventListener('submit', function(event) {
+        document.getElementById('signature_form').addEventListener('submit', function(event) {
             event.preventDefault();
-            const signature = document.getElementById('signature').outerHTML.replaceAll(/[\n\t ]{2,}/g, '');
-            const tempInput = document.createElement('textarea');
-            tempInput.value = signature;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempInput);
-            alert('Signature copiée dans le presse-papier !');
+            copyHTMLSignature();
         });
     </script>
 </body>

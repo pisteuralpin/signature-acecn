@@ -35,3 +35,14 @@ function updateLogo() {
     document.querySelector('#signature img').src = document.getElementById('logo_field').value === 'logo-acecn' ? 'https://pisteuralpin.github.io/signature-acecn/assets/logo-acecn.svg' : 'https://pisteuralpin.github.io/signature-acecn/assets/logo-mk.svg';
     document.querySelector('#signature img').alt = document.getElementById('logo_field').value === 'logo-acecn' ? "Logo de l'ACECN" : "Logo de Mario K'art";
 }
+
+function copyHTMLSignature() {
+    const signature = document.getElementById('signature').outerHTML.replaceAll(/[\n\t ]{2,}/g, '');
+    const tempInput = document.createElement('textarea');
+    tempInput.value = signature;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand('copy');
+    document.body.removeChild(tempInput);
+    alert('Signature copiée dans le presse-papier !');
+}

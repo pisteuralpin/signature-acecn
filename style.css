@@ -1,13 +1,17 @@
+* {
+    --primary-color: #fab600;
+    --secondary-color: #fecd45;
+}
+
+* {
 @media (prefers-color-scheme: light) {
-    * {
         --text-color: #202020;
         --primary-bg-color: #f8f8f8;
         --secondary-bg-color: #f4f4f4;
         --tertiary-bg-color: #e6e6e6;
     }
-}
+    
 @media (prefers-color-scheme: dark) {
-    * {
         --text-color: #f3f3f3;
         --primary-bg-color: #202020;
         --secondary-bg-color: #292929;
@@ -21,21 +25,35 @@ html {
     background-color: var(--primary-bg-color);
 }
 
-@media screen and (max-width: 768px) {
     h1 {
         text-align: center;
     }
+
+button.rectangle {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-@media screen and (max-width: 768px) {
-    section {
-        display: grid;
-        grid-template-rows: repeat(2, 1fr);
+button.primary {
+    background-color: var(--primary-color);
+    color: #122542;
+
+    &:hover {
+        background-color: var(--secondary-color);
     }
 }
-@media screen and (min-width: 480px) {
+
 section {
     display: grid;
+        
+    @media (max-width: 768px) {
+        grid-template-rows: repeat(2, 1fr);
+    }
+    @media (min-width: 480px) {
     grid-template-columns: repeat(2, 1fr);
 }
 }
@@ -54,16 +72,18 @@ input {
     margin-bottom: 1rem;
     color: var(--text-color);
     background-color: var(--secondary-bg-color);
-}
 
-input:disabled {
+    &:disabled {
     background-color: var(--primary-bg-color);
     color: var(--tertiary-bg-color);
 }
-
-input:focus {
+    &:focus {
     outline: none;
     border:2px solid #fab600;
+    }
+    &:user-invalid {
+        border: 2px solid red;
+    }
 }
 
 label {
@@ -85,37 +105,25 @@ select {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
-}
-.checkbox-container label {
+
+    label {
     margin: 0;
 }
-.checkbox-container input {
+
+    input {
     margin: 0;
     margin-right: 0.5rem;
 }
-
-button {
-    padding: 0.5rem;
-    border: none;
-    border-radius: 5px;
-    background-color: #fab600;
-    color: #122542;
-    font-size: 1rem;
-    cursor: pointer;
 }
 
-@media screen and (max-width: 768px) {
     #signature_container {
         display: flex;
         justify-content: center;
+    @media screen and (max-width: 768px) {
         align-items: start;
         margin-top: 2rem;
-    }    
 }
 @media screen and (min-width: 768px) {
-    #signature_container {
-        display: flex;
-        justify-content: center;
         align-items: center;
     }
 }
