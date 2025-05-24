@@ -48,12 +48,8 @@ button.primary {
 }
 
 section {
-    display: grid;
-        
-    @media (max-width: 768px) {
-        grid-template-rows: repeat(2, 1fr);
-    }
     @media (min-width: 480px) {
+        display: grid;
         grid-template-columns: repeat(2, 1fr);
     }
 }
