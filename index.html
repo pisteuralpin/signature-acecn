@@ -9,6 +9,41 @@
 </head>
 <body>
     <h1>Générateur de signature ACECN</h1>
+    <button id="how_to_button" class="rectangle primary">Comment la configurer ?</button>
+    <dialog id="how_to_dialog">
+        <h2>Où configurer sa signature ?</h2>
+
+        <p>Tuto pour configurer les signatures sur le webmail</p>
+
+        <form method="dialog">
+            <button class="close_button">Fermer</button>
+        </form>
+
+        <figure>
+            <img src="./assets/tuto-1.png" alt="Capture d'écran du webmail montrant où trouver les paramètres">
+            <figcaption>Ouvrir les paramètres du webmail</figcaption>
+        </figure>
+        
+        <figure>
+            <img src="./assets/tuto-2.png" alt="Capture d'écran du webmail montrant où trouver la section signature">
+            <figcaption>Ouvrir la section "Signature"</figcaption>
+        </figure>
+
+        <figure>
+            <img src="./assets/tuto-3.png" alt="Capture d'écran du webmail montrant le dropdown pour choisir le mode de signature">
+            <figcaption>Choisir le mode HTML</figcaption>
+        </figure>
+        
+        <figure>
+            <img src="./assets/tuto-4.png" alt="Capture d'écran du webmail montrant le bouton pour ajouter un objet Code source">
+            <figcaption>Ajouter un objet "Code source</figcaption>
+        </figure>
+
+        <figure>
+            <img src="./assets/tuto-5.png" alt="Capture d'écran du webmail montrant le champ pour coller le code source">
+            <figcaption>Coller le code source de la signature</figcaption>
+        </figure>
+    </dialog>
     <section>
         <div>
             <form id="signature_form">
@@ -69,7 +104,9 @@
             updateName(); updateRole(); updateEmail(); updatePhone(); updateLogo();
         });
 
-        document.getElementById('role').textContent = this.value;
+        document.getElementById('how_to_button').addEventListener('click', function() {
+            document.getElementById('how_to_dialog').showModal();
+        });
 
         Array.from(document.querySelectorAll('.name_field')).forEach(function(field) {
             field.addEventListener('input', function() { updateName(); updateEmail(); });
