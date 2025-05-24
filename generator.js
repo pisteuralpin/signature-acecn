@@ -13,18 +13,17 @@ function updatePhone() {
 
 function updateEmail() {
     let email;
-    if(!document.getElementById('bda_email_field').checked) { document.getElementById('email_field').disabled = false; }
+    if(!document.getElementById('bda_email_field').checked && !document.getElementById('ecn_email_field').checked) { document.getElementById('email_field').disabled = false; }
     if(document.getElementById('bda_email_field').checked) {
         email = "bda@ec-nantes.fr";
         document.getElementById('email_field').disabled = true;
     }
-    else if(document.getElementById('first_name_field').value.length > 0 && document.getElementById('last_name_field').value.length > 0 && (document.getElementById('email_field').value.length == 0 || ECNEmailRegex.test(document.getElementById('email_field').value))) {
+    else if(document.getElementById('ecn_email_field').checked && document.getElementById('first_name_field').value.length > 0 && document.getElementById('last_name_field').value.length > 0) {
         email = document.getElementById('first_name_field').value.toLowerCase() + '.' + document.getElementById('last_name_field').value.toLowerCase() + '@eleves.ec-nantes.fr';
         email = email.replaceAll(' ', '-');
         email = email.replaceAll('\'', '');
-        if(document.getElementById('email_field').value.length == 0 || ECNEmailRegex.test(document.getElementById('email_field').value)){
-            document.getElementById('email_field').value = email;
-        }
+        document.getElementById('email_field').value = email;
+        document.getElementById('email_field').disabled = true;
     } else {
         email = document.getElementById('email_field').value;
     }

@@ -23,6 +23,10 @@
                 <label for="email_field">Email</label>
                 <input type="email" id="email_field" placeholder="prenom.nom@eleves.ec-nantes.fr" autocomplete="email">
                 <div class="checkbox-container">
+                    <input type="checkbox" id="ecn_email_field" checked>
+                    <label for="ecn_email_field">Utiliser mon adresse @eleves.ec-nantes.fr</label>
+                </div>
+                <div class="checkbox-container">
                     <input type="checkbox" id="bda_email_field">
                     <label for="bda_email_field">Utiliser l'adresse du BDA</label>
                 </div>
@@ -67,8 +71,6 @@
 
         document.getElementById('role').textContent = this.value;
 
-        const ECNEmailRegex = new RegExp(/.*\..*@eleves.ec-nantes.fr/);
-
         Array.from(document.querySelectorAll('.name_field')).forEach(function(field) {
             field.addEventListener('input', function() { updateName(); updateEmail(); });
         });
@@ -79,7 +81,15 @@
         
         document.getElementById('email_field').addEventListener('input', function() { updateEmail(); });
 
-        document.getElementById('bda_email_field').addEventListener('change', function() { updateEmail(); });
+        document.getElementById('ecn_email_field').addEventListener('change', function() {
+            document.getElementById('bda_email_field').checked = false;
+            updateEmail();
+        });
+
+        document.getElementById('bda_email_field').addEventListener('change', function() {
+            document.getElementById('ecn_email_field').checked = false;
+            updateEmail();
+        });
         
         document.getElementById('logo_field').addEventListener('change', function() { updateLogo(); });
 
