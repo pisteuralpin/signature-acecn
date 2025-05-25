@@ -22,7 +22,6 @@ function updateEmail() {
         email = document.getElementById('first_name_field').value.toLowerCase() + '.' + document.getElementById('last_name_field').value.toLowerCase() + '@eleves.ec-nantes.fr';
         email = email.replaceAll(' ', '-');
         email = email.replaceAll('\'', '');
-        document.getElementById('email_field').value = email;
         document.getElementById('email_field').disabled = true;
     } else {
         email = document.getElementById('email_field').value;
