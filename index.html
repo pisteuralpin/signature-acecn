@@ -65,10 +65,15 @@
                     <input type="checkbox" id="bda_email_field">
                     <label for="bda_email_field">Utiliser l'adresse du BDA</label>
                 </div>
+                <label for="organisation_field">Organisation</label>
+                <select id="organisation_field">
+                    <option value="acecn">ACECN</option>
+                    <option value="bda" selected>BDA</option>
+                </select>
                 <label for="logo_field">Logo</label>
                 <select id="logo_field">
-                    <option value="logo-acecn">Logo ACECN</option>
-                    <option value="logo-MK">Logo Mario K'art</option>
+                    <option value="logo-acecn" selected>Logo ACECN</option>
+                    <option value="logo-mk">Logo Mario K'art</option>
                 </select>
                 <button type="submit" id="generate_button" class="rectangle primary">Copier</button>
             </form>
@@ -85,7 +90,7 @@
                     <td>
                         <p id="name" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;">Prénom NOM</p>
                         <p id="role" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-style:italic; font-size: small; line-height: normal;">Respo XXX</p>
-                        <p id="association" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;">Association Culturelle de l'École Centrale de Nantes</p>
+                        <p id="organisation" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;">Association Culturelle de l'École Centrale de Nantes</p>
                         <hr style=" width: 30px; height: 5px; background-color: #fab600; border: none; margin-left: 0px;" />
                         <p id="phone" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;"><a href="" style="color: #102648;"></a></p>
                         <p id="email" style="margin: 0 0 0 2px; color: #102648; font-family: Titillium, 'Titillium Web', Arial, sans-serif; font-size: small; line-height: normal;"><a href="mailto:prenom.nom@eleves.ec-nantes.fr" style="color: #102648;">prenom.nom@eleves.ec-nantes.fr</a></p>
@@ -101,7 +106,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            updateName(); updateRole(); updateEmail(); updatePhone(); updateLogo();
+            updateName(); updateRole(); updateEmail(); updatePhone(); updateOrganisation(); updateLogo();
         });
 
         document.getElementById('how_to_button').addEventListener('click', function() {
@@ -126,6 +131,11 @@
         document.getElementById('bda_email_field').addEventListener('change', function() {
             document.getElementById('ecn_email_field').checked = false;
             updateEmail();
+        });
+        document.getElementById('organisation_field').addEventListener('change', function() {
+            updateOrganisation();
+            document.getElementById('logo_field').value = document.getElementById('organisation_field').value == 'acecn' ? 'logo-acecn' : 'logo-mk';
+            updateLogo();
         });
         
         document.getElementById('logo_field').addEventListener('change', function() { updateLogo(); });

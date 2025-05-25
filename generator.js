@@ -31,6 +31,10 @@ function updateEmail() {
     document.getElementById('email').querySelector('a').href = 'mailto:' + email;
 }
 
+function updateOrganisation() {
+    document.getElementById('organisation').textContent = document.getElementById('organisation_field').value == 'acecn' ? "Association Culturelle de l'École Centrale de Nantes" : "Bureau des Arts de l'École Centrale de Nantes";
+}
+
 function updateLogo() {
     document.querySelector('#signature img').src = document.getElementById('logo_field').value === 'logo-acecn' ? 'https://pisteuralpin.github.io/signature-acecn/assets/logo-acecn.svg' : 'https://pisteuralpin.github.io/signature-acecn/assets/logo-mk.svg';
     document.querySelector('#signature img').alt = document.getElementById('logo_field').value === 'logo-acecn' ? "Logo de l'ACECN" : "Logo de Mario K'art";
