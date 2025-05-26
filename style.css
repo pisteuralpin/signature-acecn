@@ -47,6 +47,42 @@ button.primary {
     }
 }
 
+.icon-only {
+    font-size: 0;
+    display: inline-block;
+    transform: scale(1.75);
+    margin: 0 0.25rem;
+
+    &::before {
+        content: '●';
+        font-size: initial;
+        display: inline-block;
+        height: 100%; aspect-ratio: 1 / 1;
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
+        color: transparent;
+    }
+}
+
+.github-icon {
+    height: 100%; aspect-ratio: 1 / 1;
+    @media (prefers-color-scheme: light) {
+        background-image: url('./assets/github-logo-dark.svg');
+    }
+    @media (prefers-color-scheme: dark) {
+        background-image: url('./assets/github-logo-white.svg');
+    }
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.3s ease;
+
+    &:hover {
+        transform: scale(2);
+    }
+}
+
 section {
     @media (min-width: 768px) {
         display: grid;
@@ -139,6 +175,10 @@ footer {
     a {
         color: var(--text-color);
     }
+
+    p {
+        position: relative;
+    }
 }
 
 
@@ -160,7 +200,7 @@ footer {
     }
 }
 
-#how_to_dialog .close_button {
+#how_to_dialog .close-button {
     position: absolute;
     top: 1rem;
     right: 1rem;
